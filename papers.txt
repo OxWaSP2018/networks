@@ -1,0 +1,71 @@
+Hierarchical Generalized Linear Models
+Author(s): Y. Lee and  J. A. Nelder
+Source: 
+  Journal of the Royal Statistical Society. Series B (Methodological),
+Vol. 58, No. 4
+(1996), pp. 619-678
+Published by: Wiley for the Royal Statistical Society
+Stable URL: https://www.jstor.org/stable/2346105
+Accessed: 22-11-2018 11:26 UTC
+
+Bias Correction in Generalised Linear Mixed Models with a Single Component of Dispersion
+Author(s): Norman E. Breslow and  Xihong Lin
+Source: 
+  Biometrika,
+Vol. 82, No. 1 (Mar., 1995), pp. 81-91
+Published by: Oxford University Press on behalf of Biometrika Trust
+Stable URL: https://www.jstor.org/stable/2337629
+Accessed: 22-11-2018 10:58 UTC
+
+
+Hierarchical Generalised Linear Models: A Synthesis of Generalised Linear Models, Random-
+  Effect Models and Structured Dispersions
+Author(s): Youngjo Lee and  John A. Nelder
+Source: 
+  Biometrika,
+Vol. 88, No. 4 (Dec., 2001), pp. 987-1006
+Published by: Oxford University Press on behalf of Biometrika Trust
+Stable URL: https://www.jstor.org/stable/2673697
+Accessed: 22-11-2018 11:22 UTC
+
+
+A Simple Illustration of the Failure of PQL, IRREML and APHL
+as Approximate ML Methods for Mixed Models for Binary Data
+Bas Engel
+https://onlinelibrary.wiley.com/doi/epdf/10.1002/%28SICI%291521-4036%28199806%2940%3A2%3C141%3A%3AAID-BIMJ141%3E3.0.CO%3B2-A
+
+
+A comparison of Bayesian and likelihood-based methods for Øtting multilevel models 
+William J. Browne §, and David Draper
+https://projecteuclid.org/download/pdf_1/euclid.ba/1340371047
+
+WHither Pql? Breslow
+https://biostats.bepress.com/cgi/viewcontent.cgi?article=1015&context=uwbiostat
+
+
+Generalized Linear Mixed Models for Binary Data: Are
+Matching Results from Penalized Quasi-Likelihood and
+Numerical Integration Less Biased?
+https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0084601&type=printable
+
+
+Penalized Likelihood for General Semi-Parametric Regression Models
+Author(s): Peter J. Green
+Source: 
+International Statistical Review / Revue Internationale de Statistique,
+ Vol. 55, No. 3
+(Dec., 1987), pp. 245-259
+Published by: International Statistical Institute (ISI)
+Stable URL: https://www.jstor.org/stable/1403404
+Accessed: 21-11-2018 18:19 UTC
+
+
+Approximate Inference in Generalized Linear Mixed Models
+Author(s): N. E. Breslow and  D. G. Clayton
+Source: 
+Journal of the American Statistical Association,
+ Vol. 88, No. 421 (Mar., 1993), pp.
+9-25
+Published by: Taylor & Francis, Ltd. on behalf of the American Statistical Association
+Stable URL: https://www.jstor.org/stable/2290687
+Accessed: 22-11-2018 12:32 U
