@@ -17,5 +17,5 @@ sim_m <- BTm(1, form_data$contest$winner, form_data$contest$loser,
 
 
 
-summary(sim_m)
+coef(sim_m)[1:3]
 sim_data$coef
