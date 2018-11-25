@@ -1,13 +1,14 @@
 
 library(dplyr)
+num_covariates <- 3
+coef <- rnorm(num_covariates, mean = 1:num_covariates, sd = 1)
 
 peeps <- 100
 num_contests <- 1000
 sig <- 1
-num_covariates <- 3
 cov_means <- c(0,2,1)
 cov_sd <-1
-coef <- rnorm(num_covariates, mean = 1:num_covariates, sd = 3)
+
 attributes <- lapply(seq_len(peeps), function(x) rnorm(num_covariates, mean = cov_means, sd = cov_sd))
 names(attributes) <- seq_len(peeps)
 
@@ -47,12 +48,12 @@ gen_data <- function(coef, attributes, peeps, num_contests) {
     mutate(player = seq_len(peeps))
 
   contest_results <- data.frame(player_1, player_2, winner) %>%
-    mutate(
+    dplyr::mutate(
       loser = ifelse(winner == player_1, player_2, player_1),
       winner = winner,
       loser = loser
     ) %>%
-    select(winner, loser)
+    dplyr::select(winner, loser)
 
   contest_results$winner <- factor(contest_results$winner,
                                    levels = seq_len(peeps),
