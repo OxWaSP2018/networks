@@ -50,21 +50,54 @@ sample_coefficients <-  function(contest_out, X, errors) {
 
 }
 
+rw_beta_step <- function(contest_out, beta, X, errors, attributes){
 
+  elem_rw <- function(i){
+    try_again <- T
+    count <- 1
+    while (try_again & count < 10) {
+      elem_prop <-  rnorm(1, mean = beta[i], sd=1)
+
+      prop_b <- beta
+      prop_b[i] <- elem_prop
+
+      num_pi <- likli_ij(contest_out, prop_b, errors, var, attributes)
+
+      den_pi <- likli_ij(contest_out, beta, errors, var, attributes)
+
+      K <- 3
+      rej <- log(runif(1)) < num_pi - den_pi
+      try_again <- ! rej
+      count <- count +1
+    }
+    if (rej){
+      return(prop_b)
+    } else {
+      return(beta)
+    }
+  }
+
+  for (i in seq_along(beta)) {
+    beta <- elem_rw(i)
+  }
+  beta
+  }
 beta_step <- function(contest_out, X, errors, attributes) {
   params <- sample_coefficients(contest_out, X, errors)
   mean <- params$coef
   cov <- params$var
 
   try_again <- T
-  while (try_again) {
+  count <- 1
+  while (try_again & count < 10) {
     prop_b <- mvtnorm::rmvnorm(1, mean = mean, sigma = cov) %>% as.vector
     g_dens <- mvtnorm::dmvnorm(prop_b, mean = mean, sigma = cov, log = T)
     f_dens <- likli_ij(contest_out, prop_b, errors, var, attributes)
 
-    K <- 1
+    K <- 3
     rej <- f_dens - g_dens - log(K) < log(runif(1))
     try_again <- ! rej
+    #count <- count +1
   }
 
   return(list(accepted_prop = prop_b,
@@ -100,7 +133,7 @@ sample_error <- function(contest_out, attributes,coef, prev_errors, D) {
   prop_num <- bin_lik + num_dens_errors
 
 
-  if (prop_num - den_dens_errors -log_c < log(runif(1))) {
+  if ( prop_num - den_dens_errors -log_c < log(runif(1)) ) {
     return(errors)
   } else {
     return(prev_errors)

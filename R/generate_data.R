@@ -1,20 +1,21 @@
 
 library(dplyr)
 num_covariates <- 3
-coef <- rnorm(num_covariates, mean = 1:num_covariates, sd = 1)
-
+coef <- c(3.308132, 4.415711, 4.148793)
 peeps <- 100
 num_contests <- 1000
 sig <- 1
 cov_means <- c(0,2,1)
 cov_sd <-1
 
-attributes <- lapply(seq_len(peeps), function(x) rnorm(num_covariates, mean = cov_means, sd = cov_sd))
-names(attributes) <- seq_len(peeps)
 
 
-gen_data <- function(coef, attributes, peeps, num_contests) {
 
+gen_data <- function(coef, peeps, num_contests) {
+  attributes <- lapply(seq_len(peeps), function(x) rnorm(num_covariates,
+                                                         mean = cov_means,
+                                                         sd = cov_sd))
+  names(attributes) <- seq_len(peeps)
 
   errors <- rnorm(peeps, sd = sig)
   log_alpha <- sapply( seq_len(peeps), function(x) sum(coef * attributes[[x]]) + errors[x])
