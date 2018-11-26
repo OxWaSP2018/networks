@@ -18,8 +18,8 @@ error_loglik <- function(errors, var) {
 }
 
 likli_ij <- function(contest_out, coef, errors, var, attributes) {
-  covariates_winner <- attributes[contest_out$winner, c('V1','V2','V3')]
-  covariates_loser <- attributes[contest_out$loser, c('V1','V2','V3')]
+  covariates_winner <- attributes[contest_out$winner, ]
+  covariates_loser <- attributes[contest_out$loser, ]
 
   error_winner <- errors[as.numeric(contest_out$winner)]
   error_loser <- errors[as.numeric(contest_out$loser)]
@@ -61,9 +61,9 @@ rw_beta_step <- function(contest_out, beta, X, errors, attributes){
       prop_b <- beta
       prop_b[i] <- elem_prop
 
-      num_pi <- likli_ij(contest_out, prop_b, errors, var, attributes)
+      num_pi <- likli_ij(contest_out, prop_b, errors, 1, attributes)
 
-      den_pi <- likli_ij(contest_out, beta, errors, var, attributes)
+      den_pi <- likli_ij(contest_out, beta, errors, 1, attributes)
 
       K <- 3
       rej <- log(runif(1)) < num_pi - den_pi
@@ -84,18 +84,18 @@ rw_beta_step <- function(contest_out, beta, X, errors, attributes){
   }
 beta_step <- function(contest_out, X, errors, attributes) {
   params <- sample_coefficients(contest_out, X, errors)
-  mean <- params$coef
-  cov <- params$var
+  mean <- as.vector(params$coef)
+  cov <- as.matrix(params$var)
 
   try_again <- T
   count <- 1
   while (try_again & count < 10) {
     prop_b <- mvtnorm::rmvnorm(1, mean = mean, sigma = cov) %>% as.vector
     g_dens <- mvtnorm::dmvnorm(prop_b, mean = mean, sigma = cov, log = T)
-    f_dens <- likli_ij(contest_out, prop_b, errors, var, attributes)
+    f_dens <- likli_ij(contest_out, prop_b, errors, 1, attributes)
 
     K <- 3
-    rej <- f_dens - g_dens - log(K) < log(runif(1))
+    rej <- log(runif(1)) < f_dens - g_dens - log(K)
     try_again <- ! rej
     #count <- count +1
   }
@@ -133,7 +133,7 @@ sample_error <- function(contest_out, attributes,coef, prev_errors, D) {
   prop_num <- bin_lik + num_dens_errors
 
 
-  if ( prop_num - den_dens_errors -log_c < log(runif(1)) ) {
+  if ( log(runif(1)) < prop_num - den_dens_errors -log_c  ) {
     return(errors)
   } else {
     return(prev_errors)

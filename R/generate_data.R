@@ -1,7 +1,7 @@
 
 library(dplyr)
 num_covariates <- 3
-coef <- c(3.308132, 4.415711, 4.148793)
+coef0 <- c(3.308132, 4.415711, 4.148793)
 peeps <- 100
 num_contests <- 1000
 sig <- 1

@@ -35,7 +35,8 @@ err <- error_i - error_j
 errors <- data$error_terms
 
 store <- list()
-coef <- rnorm(3)
+errors <- data$error_terms
+coef <- coef0
 for (i in 1:1000){
   # Beta step
   beta_out <- beta_step(contest_out, X, errors, attributes)
@@ -77,7 +78,7 @@ geom_segment(aes(x = 0.5, xend = 1.5, y = true_coef[1], yend = true_coef[1]), co
   geom_segment(aes(x = 1.5, xend = 2.5, y = true_coef[2], yend = true_coef[2]), colour = 'black') +
   geom_segment(aes(x = 2.5, xend = 3.5, y = true_coef[3], yend = true_coef[3]), colour = 'black') +
   geom_segment(aes(x = 3.5, xend = 4.5, y = 1, yend = 1), colour = 'black')
-
+p
 gridExtra::grid.arrange(p,p2, nrow=1)
 
 
