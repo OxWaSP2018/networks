@@ -29,20 +29,25 @@ totals_df <- totals_df %>% dplyr::filter(winner < loser)
 contest_out <- totals_df %>%
   dplyr::left_join(victory_df, by= c("winner", 'loser')) %>%
   dplyr::filter(total > 0) %>%
-  dplyr::mutate(losses <- total - wins)
+  dplyr::mutate(losses = total - wins)
 
 
 attributes <- flatlizards$predictors
+numeric_cols <- colnames(attributes)[sapply(attributes, function(x) class(x)=='numeric')]
+attributes <- attributes[,numeric_cols]
+attributes <- na.omit(attributes)
 
 winner_id <- match(liz_key[contest_out$winner], rownames(attributes))
 loser_id <- match(liz_key[contest_out$loser], rownames(attributes))
+
 X_i <- attributes[winner_id,]
 X_j <- attributes[loser_id,]
 
+
 X <- X_i - X_j
 X <- as.matrix(X)
-err <- error_i - error_j
-errors <- data$error_terms
+
+errors <- rnorm(length(contest_out$loser))
 
 store <- list()
 for (i in 1:1000){
